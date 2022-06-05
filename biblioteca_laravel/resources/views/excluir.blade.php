@@ -8,8 +8,8 @@
 
     </head>
     <body>
-        <h1>Editar Livros</h1>
-        <form action="/editar-livro/{{ $livros-> id }}" method="POST">
+        <h1>Excluir Livros</h1>
+        <form action="/excluir-livro/{{ $livros-> id }}" method="POST">
             @csrf
             <label for="lblTitulo">Título do Livro:</label>
             <input type="text" name="titulo" value="{{ $livros->titulo }}">
@@ -17,7 +17,7 @@
             <label for="lblAutor">Autor do Livro:</label>
             <input type="text" name="autor" value="{{ $livros->autor }}">
             <br><br>
-            <button type="submit">Editar</button>
+            <button type="submit">Excluir</button>
         </form>
     </body>
 </html>

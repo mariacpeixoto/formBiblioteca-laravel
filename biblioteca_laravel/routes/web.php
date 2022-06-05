@@ -13,52 +13,50 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-use App\Models\Produto;
+use App\Models\Livros;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return view('inicio');
+    return view('cadastrar_livro');
 });
 
-Route::post('/cadastrar-produto', function(Request $request) {
+Route::post('/cadastrar-livro', function(Request $request) {
     //dd($request->all());
 
-    Produto::create([
-        'nome' => $request->nome,
-        'valor' => $request->valor,
-        'estoque' => $request->estoque
+    Livros::create([
+        'titulo' => $request->titulo,
+        'autor' => $request->autor
     ]);
-    echo "Produto criado com sucesso!";
+    echo "Livro cadastrado com sucesso!";
 });
 
-Route::get('/listar-produto/{id}', function($id) {
-    //dd(Produto::find($id)); //degub and die
-    $produto = Produto::find($id);
-    return view('listar', ['produto' => $produto]);
+Route::get('/listar-livro/{id}', function($id) {
+    //dd(Livros::find($id)); //degub and die
+    $livros = Livros::find($id);
+    return view('listar', ['livros' => $livros]);
 });
 
-Route::get('/editar-produto/{id}', function($id) {
-    //dd(Produto::find($id)); //degub and die
-    $produto = Produto::find($id);
-    return view('editar', ['produto' => $produto]);
-});
-
-Route::post('/editar-produto/{id}', function(Request $request, $id) {
+Route::post('/editar-livro/{id}', function(Request $request, $id) {
     //dd($request->all());
-    $produto = Produto::find($id);
+    $livros = Livros::find($id);
 
-    $produto->update([
-        'nome' => $request->nome,
-        'valor' => $request->valor,
-        'estoque' => $request->estoque
+    $livros->update([
+        'titulo' => $request->titulo,
+        'autor' => $request->autor
     ]);
-    echo "Produto editado com sucesso!";
+    echo "Livro editado com sucesso!";
 });
 
-Route::get('/excluir-produto/{id}', function($id) {
-    //dd(Produto::find($id)); //degub and die
-    $produto = Produto::find($id);
-    $produto->delete();
+Route::get('/excluir-livro/{id}', function($id) {
+    //dd(Livros::find($id)); //degub and die
+    $livros = livros::find($id);
+    return view('excluir', ['livros' => $livros]);
+});
 
-    echo "Produto excluído com sucesso!";
+Route::post('/excluir-livro/{id}', function($id) {
+    //dd(Livros::find($id)); //degub and die
+    $livros = Livros::find($id);
+    $livros->delete();
+
+    echo "Livro excluído com sucesso!";
 });
